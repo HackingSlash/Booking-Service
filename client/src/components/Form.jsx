@@ -130,7 +130,7 @@ export default class Form extends React.Component {
       guest_name: 'Mo',
     };
 
-    axios.post('/booking', data)
+    axios.post('/davidMongo', data)
       .then((response) => {
         alert('Congratulations! The room is reserved for you!');
       })

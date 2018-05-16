@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/bookings')
+mongoose.connect('mongodb://172.17.0.3/davidMongo')
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -8,9 +8,16 @@ db.once('open', () => {
 });
 
 // create a schema for DB data
-const bookingSchema = mongoose.Schema({
 
-  room_id: Number,
+var Schema = mongoose.Schema;
+
+const bookingSchema = new Schema({
+
+  room_id: {
+    type: Number,
+    index: true,
+    unique: true
+  },
   room_name: String,
   world_name: String,
   keywords: String,
@@ -62,12 +69,14 @@ const find = (callback) => {
 
 // fetching one specific room data from DB
 const findOne = (id, callback) => {
-  Room.findOne({ room_id: id }).exec((err, room) => {
+  console.log(id);
+  Room.findOne({ room_id: id }, (err, room) => {
     if (err) {
       callback(err, null);
-      return console.error(err);
+    } else {
+      console.log(null, room)
+      callback(null, room);
     }
-    callback(null, room);
   });
 };
 
@@ -77,3 +86,5 @@ module.exports = {
   findOne,
   Room,
 };
+
+

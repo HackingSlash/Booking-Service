@@ -14,7 +14,7 @@ class Booking extends React.Component {
     this.state = {
       scrolled: false,
       room: {
-        room_id: this.props.room,
+        room_id: this.props.room_id,
       },
     };
     this.handleScroll = this.handleScroll.bind(this);
@@ -35,13 +35,14 @@ class Booking extends React.Component {
   // Fetch this page's room data
   getRoomData() {
     // webpack -p => 'production' & webpack -d => 'development' env swtich
-    const url = (process.env.NODE_ENV === 'production') ? 'http://ec2-184-72-109-180.compute-1.amazonaws.com' : 'http://localhost:7777'; 
+    const url = (process.env.NODE_ENV === 'production') ? 'http://ec2-18-219-23-182.us-east-2.compute.amazonaws.com' : 'http://ec2-18-219-23-182.us-east-2.compute.amazonaws.com'; 
   
     if (process.env.NODE_ENV !== 'production') {
        console.log('Looks like we are in development mode!');
+      console.log('JAKE')
     }
 
-    axios.get(`${url}/booking/${this.state.room.room_id}`)
+    axios.get(`${url}/davidMongo/${this.state.room.room_id}`)
       .then((items) => {
         this.setState({ room: items.data });
       })
@@ -80,7 +81,7 @@ class Booking extends React.Component {
   }
 
   render() {
-
+    
     return (
       <div id="container" onScroll={this.handleScroll} className={styles.container}>
         <div className={styles.component}>       

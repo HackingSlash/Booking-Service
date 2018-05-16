@@ -1,0 +1,14 @@
+config:
+ target: 'http://localhost:7777'
+ phases:
+   - duration: 10
+     arrivalRate: 10
+     name: 'phase1'
+scenarios:
+ - name: >-
+     make queries for different rooms
+   flow:
+     - loop:
+         - get:
+             url: '/davidMongo/{{ $randomNUmber }}'
+             count: 2

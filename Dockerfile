@@ -6,7 +6,8 @@ WORKDIR /src/app
 
 COPY . /src/app
 
-RUN yarn install
+RUN npm install
+RUN npm run react-prod
 
 EXPOSE 7777
 
